@@ -72,11 +72,10 @@ export function LinkShortenForm() {
 			} else {
 				setErrorMessage(response.data?.error || 'Erro ao encurtar a URL.');
 			}
-		} catch (error: any) {
-			if (error.response) {
-				const errorData = error.response.data as ShortenUrlErrorResponse;
-				setErrorMessage(errorData.error || 'Erro ao encurtar a URL.');
-			}
+		} catch (error) {
+			setErrorMessage(
+				(error instanceof Error ? error.message : 'Erro ao encurtar a URL.')
+			);
 		}
 	}
 
