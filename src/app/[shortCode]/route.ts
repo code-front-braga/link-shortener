@@ -7,11 +7,8 @@ interface ParamsProps {
 	};
 }
 
-export async function GET(
-	_request: Request,
-	{ params }: { params: { shortCode: string } },
-) {
-	const { shortCode } = params;
+export async function GET(_request: Request, { params }: ParamsProps) {
+	const { shortCode } = await Promise.resolve(params);
 
 	try {
 		const link = await prisma.link.findUnique({ where: { shortCode } });

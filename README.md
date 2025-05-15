@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Encurtador de URLs Minimalista
 
-## Getting Started
+Este é um projeto de um encurtador de URLs simples e funcional, construído com Next.js, React, Prisma e PostgreSQL.
 
-First, run the development server:
+## Funcionalidades Atuais
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Encurtamento de URLs:** Permite aos usuários inserir um URL longo e obter um link curto único.
+- **Redirecionamento:** Ao acessar o link curto, o usuário é automaticamente redirecionado para o URL original.
+- **Código Curto Personalizado (Opcional):** Os usuários podem fornecer um código curto desejado (se disponível).
+- **Validação de URL:** O formulário no frontend realiza a validação básica do formato da URL.
+- **Cópia para o Clipboard:** Um botão permite copiar facilmente o URL encurtado para a área de transferência.
+- **Interface de Usuário:** Uma interface simples e intuitiva para encurtar URLs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:**
+  - [Next.js](https://nextjs.org/) (Framework React para aplicações web com renderização server-side e rotas de API)
+  - [React](https://react.dev/) (Biblioteca JavaScript para construção de interfaces de usuário)
+  - [react-hook-form](https://react-hook-form.com/) (Para gerenciamento de formulários)
+  - [zod](https://zod.dev/) (Para validação de dados)
+  - [axios](https://axios-http.com/) (Para fazer requisições HTTP)
+  - [Tailwind CSS](https://tailwindcss.com/) (Para estilização)
+  - [Shadcn UI](https://ui.shadcn.com/) (Para componentização)
+  - [react-icons](https://react-icons.github.io/react-icons/) (Para ícones)
+  - [react-spinners](https://www.npmjs.com/package/react-spinners) (Para indicadores de carregamento)
+- **Backend:**
+  - [Next.js](https://nextjs.org/) (Rotas de API)
+  - [Prisma](https://www.prisma.io/) (ORM para acesso ao banco de dados)
+  - [PostgreSQL](https://www.postgresql.org/) (Banco de dados relacional)
+  - [nanoid](https://github.com/ai/nanoid) (Para geração de códigos curtos únicos)
+  - [bcryptjs](https://github.com/kelektiv/node.bcrypt.js/) (Para hashing de senhas - futura funcionalidade de autenticação)
+- **Deploy:**
+  - [Vercel](https://vercel.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Próximos Passos (Em Desenvolvimento)
 
-## Learn More
+- [ ] Implementação de autenticação de usuários para uma área administrativa.
+- [ ] Criação de uma interface administrativa para visualizar métricas de cliques dos links.
+- [ ] Refinamento da lógica e validação para códigos curtos personalizados.
+- [ ] Possível implementação de proteção de links (senha ou privacidade).
+- [ ] Possível coleta de informações de análise de cliques.
 
-To learn more about Next.js, take a look at the following resources:
+## Como Executar Localmente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Clone o repositório:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```bash
+    git clone https://github.com/code-front-braga/link-shortener.git
+    ```
 
-## Deploy on Vercel
+2.  Instale as dependências:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm install
+    # ou
+    pnpm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3.  Configure as variáveis de ambiente:
+
+    - Crie um arquivo `.env.local` na raiz do projeto.
+    - Adicione as seguintes variáveis (ajuste conforme sua configuração local):
+      ```
+      DATABASE_URL="sua_url_de_conexao_postgresql"
+      HOST_URL="http://localhost:3000"
+      ```
+      **Lembre-se de configurar corretamente a sua conexão com o PostgreSQL.**
+
+4.  Execute as migrations do Prisma:
+
+    ```bash
+    npx prisma migrate dev
+    # ou
+    pnpm prisma migrate dev
+    ```
+
+5.  Inicie o servidor de desenvolvimento:
+
+    ```bash
+    npm run dev
+    # ou
+    pnpm dev
+    ```
+
+6.  Abra seu navegador em `http://localhost:3000` para ver a aplicação rodando localmente.
+
+## Status do Projeto
+
+Em desenvolvimento.

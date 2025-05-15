@@ -18,6 +18,8 @@ import { useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { BiSolidCopy } from 'react-icons/bi';
 import { BeatLoader } from 'react-spinners';
+import { FaCheck } from 'react-icons/fa6';
+
 import {
 	Popover,
 	PopoverContent,
@@ -62,9 +64,6 @@ export function LinkShortenForm() {
 			const response = await axiosInstance.post<ShortenUrlSuccessResponse>(
 				'/api/shorten',
 				data,
-				{
-					headers: { 'Content-Type': 'application/json' },
-				},
 			);
 
 			if (response.status === 201) {
@@ -83,7 +82,14 @@ export function LinkShortenForm() {
 
 	async function handleCopyUrl() {
 		setCopied(!copied);
-		await navigator.clipboard.writeText(shortenedUrl!);
+
+		try {
+			await navigator.clipboard.writeText(shortenedUrl!);
+		} catch {}
+
+		setTimeout(() => {
+			setCopied(copied);
+		}, 1400);
 	}
 
 	return (
@@ -136,7 +142,7 @@ export function LinkShortenForm() {
 				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 				{shortenedUrl && (
 					<Alert className="relative mt-4">
-						<Popover>
+						<Popover open={copied}>
 							<PopoverTrigger asChild>
 								<Button
 									type="button"
@@ -145,7 +151,11 @@ export function LinkShortenForm() {
 									size="icon"
 									className="absolute right-0"
 								>
-									<BiSolidCopy color="#ea580c" />
+									{copied ? (
+										<FaCheck color="#ea580c" />
+									) : (
+										<BiSolidCopy color="#ea580c" />
+									)}
 								</Button>
 							</PopoverTrigger>
 							<PopoverContent side="top" className="mr-6">
