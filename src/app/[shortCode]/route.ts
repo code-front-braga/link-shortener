@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
 	req: NextRequest,
-	{ params }: { params: { shortCode: string } },
+	{ params }: { params: Promise<{ shortCode: string }> },
 ) {
-	const { shortCode } = params;
+	const { shortCode } = await params;
 
 	try {
 		const link = await prisma.link.findUnique({ where: { shortCode } });
@@ -25,7 +25,5 @@ export async function GET(
 	} catch (error) {
 		console.error(error);
 		return new NextResponse('Erro ao redirecionar', { status: 500 });
-	} finally {
-		await prisma.$disconnect();
 	}
 }

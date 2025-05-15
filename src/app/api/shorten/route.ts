@@ -54,7 +54,5 @@ export async function POST(request: Request) {
 			{ error: 'Erro interno ao encurtar a URL.' },
 			{ status: 500 }, // Status "Internal Server Error"
 		);
-	} finally {
-		await prisma.$disconnect(); // Desconecta o Prisma Client para liberar a conexão com o banco de dados
 	}
 }
