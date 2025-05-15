@@ -14,18 +14,34 @@ export async function POST(request: Request) {
 			);
 		}
 
-		let shortCode: string;
-		let linkExists;
-		do {
-			shortCode = nanoid(8);
-			linkExists = await prisma.link.findUnique({ where: { shortCode } });
-		} while (linkExists);
+		let shortCode: string | undefined = desiredShortCode;
+
+		if (desiredShortCode && typeof desiredShortCode === 'string') {
+			const linkExists = await prisma.link.findUnique({
+				where: { shortCode: desiredShortCode },
+			});
+
+			if (linkExists) {
+				return NextResponse.json(
+					{ error: 'Código curto desejado já está em uso.' },
+					{ status: 409 },
+				); // Status "Conflict"
+			}
+		} else {
+			do {
+				shortCode = nanoid(8);
+				const linkExists = await prisma.link.findUnique({
+					where: { shortCode },
+				});
+				if (!linkExists) break;
+			} while (true);
+		}
 
 		const baseUrl = process.env.HOST_URL;
 		const shortUrl = `${baseUrl}/${shortCode}`;
 
 		const newLink = await prisma.link.create({
-			data: { longUrl: longUrl, shortCode, title: '' },
+			data: { longUrl, shortCode: shortCode! }, // "!" pois shortCode será definido em ambos os caminhos
 		});
 
 		return NextResponse.json(

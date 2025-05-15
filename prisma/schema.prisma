@@ -10,7 +10,7 @@ datasource db {
 
 model Link {
   id        String   @id @default(cuid())
-  title     String
+  title     String?
   shortCode String   @unique
   longUrl   String
   click     Int      @default(0)

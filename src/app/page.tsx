@@ -1,5 +1,5 @@
+import { LinkShortenForm } from './components/link-shorten-form';
+
 export default function Home() {
-  return (
-    <h1>home</h1>
-  );
+	return <LinkShortenForm />;
 }
