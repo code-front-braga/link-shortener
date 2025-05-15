@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
 	_request: Request,
-	request: Request,
 	{ params }: { params: { shortCode: string } },
 ) {
 	const { shortCode } = await Promise.resolve(params);
