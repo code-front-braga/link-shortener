@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
 	req: NextRequest,
-	context: { params: { shortCode: string } },
+	context: { params: Record<string, string> },
 ) {
 	const { shortCode } = context.params;
 
