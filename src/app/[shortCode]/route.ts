@@ -2,16 +2,16 @@ import { prisma } from '@/lib/prisma/prisma-instance';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface Context {
-  params: {
-    shortCode: string;
-  };
+	params: {
+		shortCode: string;
+	};
 }
 
 export async function GET(
-	request: NextRequest, // Use NextRequest para o primeiro argumento (opcional, mas boa prática)
-  context: Context,
+	request: NextRequest,
+	{ params }: { params: { shortCode: string } },
 ) {
-	const { shortCode } = await Promise.resolve(context.params);
+	const { shortCode } = await Promise.resolve(params);
 
 	try {
 		const link = await prisma.link.findUnique({ where: { shortCode } });
