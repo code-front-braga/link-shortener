@@ -1,12 +1,6 @@
 import { prisma } from '@/lib/prisma/prisma-instance';
 import { NextRequest, NextResponse } from 'next/server';
 
-interface Context {
-	params: {
-		shortCode: string;
-	};
-}
-
 export async function GET(
 	request: NextRequest,
 	{ params }: { params: { shortCode: string } },
