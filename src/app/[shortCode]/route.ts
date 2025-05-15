@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
 	req: NextRequest,
-	context: { params: Record<string, string> },
+	{ params }: { params: { shortCode: string } },
 ) {
-	const { shortCode } = context.params;
+	const { shortCode } = params;
 
 	try {
 		const link = await prisma.link.findUnique({ where: { shortCode } });
