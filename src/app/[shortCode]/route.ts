@@ -1,13 +1,11 @@
 import { prisma } from '@/lib/prisma/prisma-instance';
 import { NextResponse } from 'next/server';
 
-interface ParamsProps {
-	params: {
-		shortCode: string;
-	};
-}
-
-export async function GET(_request: Request, { params }: ParamsProps) {
+export async function GET(
+	_request: Request,
+	request: Request,
+	{ params }: { params: { shortCode: string } },
+) {
 	const { shortCode } = await Promise.resolve(params);
 
 	try {
