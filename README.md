@@ -2,6 +2,8 @@
 
 Este é um projeto de um encurtador de URLs simples e funcional, construído com Next.js, React, Prisma e PostgreSQL.
 
+[Veja o projeto](https://link-shortener-phi-five.vercel.app)
+
 ## Funcionalidades Atuais
 
 - **Encurtamento de URLs:** Permite aos usuários inserir um URL longo e obter um link curto único.
